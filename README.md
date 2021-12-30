@@ -5,8 +5,6 @@
 
 Uma aplicação simples para monitorar clima em cidades.
 
-## Extra
-
 
 ## Como rodar a aplicação
 
