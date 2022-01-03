@@ -1,5 +1,7 @@
 import {ActionProps, DispatchProps, ResponseProps} from '../types';
-import {getCitiesForecast} from './citiesForecats';
+import {getCitiesForecast} from './citiesForecast';
+import {NewCityProps} from '../../models/storeCity';
+import {GeoResponse} from '../../models/geo';
 
 const Types = {
   ADD_CITY: 'cities/ADD_CITY',
@@ -20,10 +22,10 @@ export const Creators = {
   }),
 };
 
-export function addCity(city: any) {
+export function addCity(city: GeoResponse) {
   return (dispatch: DispatchProps, getState: any) => {
     const {storedCities} = getState().citiesState;
-    const newCity = {
+    const newCity: NewCityProps = {
       id: city.id,
       name: city.name,
       lat: city.coord.lat,
@@ -31,8 +33,7 @@ export function addCity(city: any) {
       like: false,
     };
 
-    const hasCity = storedCities.find((el: any) => el.id === city.id);
-
+    const hasCity = storedCities.find((el: NewCityProps) => el.id === city.id);
     if (!hasCity) {
       dispatch(Creators.add([...storedCities, newCity]));
       dispatch(getCitiesForecast());
@@ -40,13 +41,13 @@ export function addCity(city: any) {
   };
 }
 
-export function removeCity(city: any) {
+export function removeCity(id: number) {
   return (dispatch: DispatchProps, getState: any) => {
     const {storedCities} = getState().citiesState;
     const filteredCities = storedCities.filter(
-      (storeCity: any) => storeCity.id !== city.id,
+      (storeCity: NewCityProps) => storeCity.id !== id,
     );
-    dispatch(Creators.add([...filteredCities]));
+    dispatch(Creators.add(filteredCities));
     dispatch(getCitiesForecast());
   };
 }
@@ -60,12 +61,13 @@ export function likeCity(city: any, like: boolean) {
     const newLikedCities = storedCities.filter((el: any) => el.id !== city.id);
 
     dispatch(Creators.add([...newLikedCities, newCity]));
+    dispatch(getCitiesForecast());
   };
 }
 
 const initialState = {
   storedCities: [],
-  citiesForecats: [],
+  citiesForecast: [],
 };
 
 export default function citiesState(state = initialState, action: ActionProps) {

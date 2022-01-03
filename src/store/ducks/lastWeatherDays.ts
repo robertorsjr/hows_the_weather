@@ -1,10 +1,10 @@
+import {findLastWeatherDays} from '../../services/findWeather';
 import {ActionProps, DispatchProps, ResponseProps} from '../types';
-import {findWeatherByGeo} from '../../services/findWeather';
 
 const Types = {
-  REQUEST: 'citiesForecats/REQUEST',
-  REQUEST_SUCCESS: 'citiesForecats/REQUEST_SUCCESS',
-  REQUEST_FAILURE: 'citiesForecats/REQUEST_FAILURE',
+  REQUEST: 'findLastWeatherDays/REQUEST',
+  REQUEST_SUCCESS: 'findLastWeatherDays/REQUEST_SUCCESS',
+  REQUEST_FAILURE: 'findLastWeatherDays/REQUEST_FAILURE',
 };
 
 export const Creators = {
@@ -20,7 +20,7 @@ export const Creators = {
     type: Types.REQUEST_SUCCESS,
     data: {
       loading: false,
-      citiesForecats: response,
+      data: response,
     },
   }),
 
@@ -33,20 +33,12 @@ export const Creators = {
   }),
 };
 
-export function getCitiesForecast() {
-  return async (dispatch: DispatchProps, getState: any) => {
+export function requestFindLastWeatherDays(lat: number, lon: number) {
+  return async (dispatch: DispatchProps) => {
     dispatch(Creators.request());
-
     try {
-      const {storedCities} = getState().citiesState;
-
-      const promises = storedCities.map(async (el: any) => {
-        return findWeatherByGeo(el.lat, el.lon);
-      });
-
-      const responses = await Promise.all(promises);
-
-      dispatch(Creators.requestSuccess(responses.map((el: any) => el.data)));
+      const response = await findLastWeatherDays(lat, lon);
+      dispatch(Creators.requestSuccess(response.data));
     } catch (error) {
       dispatch(Creators.requestFailure());
     }
@@ -56,10 +48,10 @@ export function getCitiesForecast() {
 const initialState = {
   loading: false,
   error: false,
-  citiesForecats: [],
+  data: false,
 };
 
-export default function citiesForecatsState(
+export default function findLastWeatherDaysState(
   state = initialState,
   action: ActionProps,
 ) {

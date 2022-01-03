@@ -1,9 +1,8 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
-import FastImage from 'react-native-fast-image';
+import React, {useEffect} from 'react';
 import {
   Column,
   DefaultPressable,
+  EmptyView,
   GoBackButton,
   Loading,
   Row,
@@ -12,17 +11,17 @@ import {
   WeatherImage,
   WeatherText,
 } from '../../components';
-import {findLastWeatherDays} from '../../services/findWeather';
-import {WeatherDetails} from '../../models/details';
 import {findMyWeatherPng} from '../../utils/findWeatherPng';
 import {ArrowUp, Trash} from '../../icons';
 import {Colors} from '../../resources';
 import {returnOnlyDayAndMonth} from '../../utils/formatDate';
 import DailyDetail from './DailyDetail';
 import {StatusBar} from 'react-native';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppDispatch, useAppSelector} from '../../hooks/useAppDispatch';
 import {removeCity} from '../../store/ducks/cities';
 import {useNavigation} from '@react-navigation/native';
+import {requestFindLastWeatherDays} from '../../store/ducks/lastWeatherDays';
+import {WeatherDetails} from '../../models/details';
 
 type DetailProps = {
   route: {
@@ -30,40 +29,43 @@ type DetailProps = {
       lat: number;
       lon: number;
       name: string;
+      id: number;
     };
   };
 };
 
+type SelectorProps = {
+  loading: boolean;
+  error: boolean;
+  data: WeatherDetails;
+};
+
 function WeatherDetail({route}: DetailProps) {
-  const {lat, lon, name} = route.params;
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [isError, setError] = useState<boolean>(false);
-  const [cityDetail, setCityDetail] = useState<WeatherDetails>();
+  const {lat, lon, name, id} = route.params;
   const navigation = useNavigation<any>();
+  const {
+    data: cityDetail,
+    loading,
+    error,
+  }: SelectorProps = useAppSelector(
+    ({findLastWeatherDaysState}) => findLastWeatherDaysState,
+  );
+
+  const {data: actualLocation} = useAppSelector(
+    ({actualLocationForecastState}) => actualLocationForecastState,
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    async function getDetail() {
-      try {
-        setLoading(true);
-        const {data} = await findLastWeatherDays(lat, lon);
-        setCityDetail(data);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
+    dispatch(requestFindLastWeatherDays(lat, lon));
+  }, [dispatch, lat, lon]);
 
-    getDetail();
-  }, [lat, lon]);
-
-  if (isLoading) {
+  if (loading) {
     return <Loading />;
   }
 
   function handleRemoveItem() {
-    dispatch(removeCity(cityDetail));
+    dispatch(removeCity(id));
     navigation.navigate('Home');
   }
 
@@ -76,12 +78,16 @@ function WeatherDetail({route}: DetailProps) {
         <WeatherText size={20} medium textAlign={'center'} color={Colors.white}>
           {name}
         </WeatherText>
-        <DefaultPressable onPress={handleRemoveItem}>
-          <Trash />
-        </DefaultPressable>
+        {actualLocation.name === name ? (
+          <EmptyView />
+        ) : (
+          <DefaultPressable onPress={handleRemoveItem}>
+            <Trash />
+          </DefaultPressable>
+        )}
       </Row>
       <Separator y={30} />
-      {!isError && cityDetail ? (
+      {!error && cityDetail ? (
         <Column center>
           <WeatherImage
             source={{

@@ -11,7 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		3D2F8C261E084EF6AB7FE8FA /* NotoSerif-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF6253691C64894926E2A57 /* NotoSerif-Regular.ttf */; };
+		46313D53B3834FDB880D8C4F /* NotoSerif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7B81E31A5044478701C1E3 /* NotoSerif.ttf */; };
 		4FD3875B04894341960D046F /* NotoSerif-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A571AE3E6D54A50837C8041 /* NotoSerif-Italic.ttf */; };
 		6172F2D35A4C3AA820D92908 /* libPods-hows_the_weather.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-hows_the_weather.a */; };
 		67A335ABB77E485AA2D4F52D /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBA694DDB36346F298300547 /* Roboto-Black.ttf */; };
@@ -51,13 +51,13 @@
 		814DB8A4E42541ACA3BC381E /* NotoSerif-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSerif-Bold.ttf"; path = "../assets/fonts/NotoSerif-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hows_the_weather/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A571AE3E6D54A50837C8041 /* NotoSerif-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSerif-Italic.ttf"; path = "../assets/fonts/NotoSerif-Italic.ttf"; sourceTree = "<group>"; };
-		9AF6253691C64894926E2A57 /* NotoSerif-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSerif-Regular.ttf"; path = "../assets/fonts/NotoSerif-Regular.ttf"; sourceTree = "<group>"; };
 		A9C9DDC106064275B991D6F5 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-hows_the_weather-hows_the_weatherTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hows_the_weather-hows_the_weatherTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF29ED20503F45FE82C1D903 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		C0A881CF5CF3F2B244570E2A /* Pods-hows_the_weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hows_the_weather.debug.xcconfig"; path = "Target Support Files/Pods-hows_the_weather/Pods-hows_the_weather.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-hows_the_weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hows_the_weather.release.xcconfig"; path = "Target Support Files/Pods-hows_the_weather/Pods-hows_the_weather.release.xcconfig"; sourceTree = "<group>"; };
 		D272BE3F500C40EB9E23DF06 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		DA7B81E31A5044478701C1E3 /* NotoSerif.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NotoSerif.ttf; path = ../assets/fonts/NotoSerif.ttf; sourceTree = "<group>"; };
 		EBA694DDB36346F298300547 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -159,12 +159,12 @@
 			children = (
 				814DB8A4E42541ACA3BC381E /* NotoSerif-Bold.ttf */,
 				8A571AE3E6D54A50837C8041 /* NotoSerif-Italic.ttf */,
-				9AF6253691C64894926E2A57 /* NotoSerif-Regular.ttf */,
 				EBA694DDB36346F298300547 /* Roboto-Black.ttf */,
 				620996DAC64143BFAF9F1B54 /* Roboto-Bold.ttf */,
 				D272BE3F500C40EB9E23DF06 /* Roboto-Italic.ttf */,
 				A9C9DDC106064275B991D6F5 /* Roboto-Medium.ttf */,
 				BF29ED20503F45FE82C1D903 /* Roboto-Regular.ttf */,
+				DA7B81E31A5044478701C1E3 /* NotoSerif.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -278,12 +278,12 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				C4637F497D9F454BB0E6F33C /* NotoSerif-Bold.ttf in Resources */,
 				4FD3875B04894341960D046F /* NotoSerif-Italic.ttf in Resources */,
-				3D2F8C261E084EF6AB7FE8FA /* NotoSerif-Regular.ttf in Resources */,
 				67A335ABB77E485AA2D4F52D /* Roboto-Black.ttf in Resources */,
 				B4071165028044A18E835CDE /* Roboto-Bold.ttf in Resources */,
 				C7C2AD9CA5614612B6379A1D /* Roboto-Italic.ttf in Resources */,
 				DF7E9A45CA1B494EA6AC0E73 /* Roboto-Medium.ttf in Resources */,
 				B00678FAA21F4B28ABB458B9 /* Roboto-Regular.ttf in Resources */,
+				46313D53B3834FDB880D8C4F /* NotoSerif.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

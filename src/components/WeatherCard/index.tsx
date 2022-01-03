@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Column,
   DefaultPressable,
-  Loading,
   Row,
   WeatherLikeButton,
   WeatherText,
@@ -20,7 +19,7 @@ type WeatherCardProps = {
 
 function WeatherCard({item, isLocal, handlePress}: WeatherCardProps) {
   if (!item) {
-    return <Loading />;
+    return null;
   }
 
   return (
@@ -52,7 +51,7 @@ function WeatherCard({item, isLocal, handlePress}: WeatherCardProps) {
         <WeatherText my={10} size={16} color={Colors.purple}>
           {item.weather[0].description}
         </WeatherText>
-        <Row justifyContent={'flex-end'} alignItems={'center'}>
+        <Row justifyContent={'flex-end'} alignItems={'center'} bottom={3}>
           {isLocal ? (
             <WeatherText>Sua localização</WeatherText>
           ) : (

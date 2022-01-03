@@ -14,8 +14,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../hooks/useAppDispatch';
 import {requestActualLocationForecast} from '../../store/ducks/actualLocationForecast';
 import {requestSearchCity} from '../../store/ducks/searchCity';
-import {getCitiesForecast} from '../../store/ducks/citiesForecats';
-import reactotron from '../../utils/ReactotronConfig';
+import {getCitiesForecast} from '../../store/ducks/citiesForecast';
+import {GeoResponse} from '../../models/geo';
 
 function Home() {
   const [filter, setFilter] = useState<string>('');
@@ -24,12 +24,12 @@ function Home() {
     ({searchCityState}) => searchCityState,
   );
 
-  const {data: actualLocation, loading} = useAppSelector(
+  const {data: actualLocation} = useAppSelector(
     ({actualLocationForecastState}) => actualLocationForecastState,
   );
 
-  const {citiesForecats} = useAppSelector(
-    ({citiesForecatsState}) => citiesForecatsState,
+  const {citiesForecast, loading} = useAppSelector(
+    ({citiesForecastState}) => citiesForecastState,
   );
 
   const navigation = useNavigation<any>();
@@ -38,7 +38,7 @@ function Home() {
   useEffect(() => {
     dispatch(requestActualLocationForecast());
     dispatch(getCitiesForecast());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(
@@ -48,21 +48,20 @@ function Home() {
       filter === '' ? 0 : 2000,
     );
     return () => clearTimeout(delayDebounceFn);
-  }, [filter]);
+  }, [dispatch, filter]);
 
-  function handleCityPress(location: any) {
+  function handleCityPress(location: GeoResponse) {
     navigation.navigate('WeatherDetail', {
       lat: location.coord.lat,
       lon: location.coord.lon,
       name: location.name,
+      id: location.id,
     });
   }
 
   if (loading) {
     return <Loading />;
   }
-
-  reactotron.log(citiesForecats);
 
   return (
     <WeatherContainer>
@@ -73,8 +72,8 @@ function Home() {
         <CityCard item={searchData} setSearch={setSearch} />
       ) : (
         <WeatherList
-          data={citiesForecats}
-          keyExtractor={(item: any, index: number) => String(index)}
+          data={citiesForecast}
+          keyExtractor={(item, index: number) => String(index)}
           ItemSeparatorComponent={() => <Separator y={10} />}
           ListHeaderComponent={() => (
             <>
