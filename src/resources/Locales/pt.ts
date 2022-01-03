@@ -18,6 +18,7 @@ const pt: any = {
   permissionNegativeButton: 'Cancelar',
   permissionPositiveButton: 'OK',
   placeHolderMessage: 'Procure uma cidade',
+  emptySearchMessage: 'Nenhuma cidade foi encontrada :(',
 };
 
 export default pt;

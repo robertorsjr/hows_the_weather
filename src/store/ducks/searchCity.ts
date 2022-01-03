@@ -21,6 +21,8 @@ export const Creators = {
     type: Types.CLEAR,
     data: {
       data: false,
+      loading: false,
+      error: false,
     },
   }),
 

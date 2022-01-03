@@ -18,6 +18,7 @@ const us: any = {
   permissionNegativeButton: 'Cancel',
   permissionPositiveButton: 'OK',
   placeHolderMessage: 'Search for a city',
+  emptySearchMessage: 'No cities were found :(',
 };
 
 export default us;

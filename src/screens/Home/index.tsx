@@ -8,6 +8,7 @@ import {
   Separator,
   WeatherCard,
   EmptyList,
+  WeatherText,
 } from '../../components';
 import WeatherList from '../../components/WeatherList';
 import {useNavigation} from '@react-navigation/native';
@@ -21,7 +22,7 @@ import {Colors} from '../../resources';
 function Home() {
   const [filter, setFilter] = useState<string>('');
   const [isSearch, setSearch] = useState<boolean>(false);
-  const {data: searchData} = useAppSelector(
+  const {data: searchData, error} = useAppSelector(
     ({searchCityState}) => searchCityState,
   );
 
@@ -46,13 +47,12 @@ function Home() {
   }, [dispatch, language]);
 
   useEffect(() => {
-    const delayDebounceFn = setTimeout(
-      () => {
+    if (filter) {
+      const delayDebounceFn = setTimeout(() => {
         dispatch(requestSearchCity(filter));
-      },
-      filter === '' ? 0 : 2000,
-    );
-    return () => clearTimeout(delayDebounceFn);
+      }, 2000);
+      return () => clearTimeout(delayDebounceFn);
+    }
   }, [dispatch, filter]);
 
   function handleCityPress(location: GeoResponse) {
@@ -74,7 +74,11 @@ function Home() {
       <Separator y={20} />
       <Header isSearch={isSearch} setSearch={setSearch} setFilter={setFilter} />
       {isSearch ? (
-        <CityCard item={searchData} setSearch={setSearch} />
+        !error ? (
+          <CityCard item={searchData} setSearch={setSearch} />
+        ) : (
+          <EmptyList isSearch />
+        )
       ) : (
         <WeatherList
           data={citiesForecast}
