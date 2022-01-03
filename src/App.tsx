@@ -1,17 +1,21 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, Text, View} from 'react-native';
+import {Provider} from 'react-redux';
+import {NavigationContainer} from '@react-navigation/native';
+import {PersistGate} from 'redux-persist/integration/react';
+import Routes from './routes';
+import store, {persistor} from './store';
+import {Loading} from './components';
 
-const App = () => {
+function App() {
   return (
-    <SafeAreaView>
-      <StatusBar barStyle={'dark-content'} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View>
-          <Text>Hello World</Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate loading={<Loading />} persistor={persistor}>
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
-};
+}
 
 export default App;
