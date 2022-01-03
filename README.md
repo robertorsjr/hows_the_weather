@@ -1,26 +1,26 @@
 <h1 align="center" >How's the weather?</h1>
 
 
-## Descrição da aplicação
+## Application description
 
-Uma aplicação simples para monitorar clima em cidades.
+this aplication has made to list, add, favorite and remove cities with their climates
 
 
-## Como rodar a aplicação
+## How to run the application
 
-No terminal
+in terminal
 
 ```
-# Para instalar dependencias
+# to install dependecies
 
   yarn
-  # ou se vc estiver usando NPM
+  # or if you are using NPM
   npm install
   
 
-# Para rodar a aplicação
+# To run application
 
   yarn start
-  # ou com NPM
+  # or with NPM
   npm start
 ```
