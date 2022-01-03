@@ -2,7 +2,7 @@ import React from 'react';
 import {Wrapper, ModalButton, ModalView} from './styles';
 import {DefaultPressable, Row, Separator, WeatherText} from '../index';
 import Modal from 'react-native-modal';
-import {Colors} from '../../resources';
+import {Colors, t} from '../../resources';
 
 type ModalProps = {
   showModal: boolean;
@@ -24,16 +24,16 @@ function ConfirmationModal({
         onBackdropPress={() => toggleModal(!showModal)}>
         <ModalView>
           <WeatherText size={16} medium>
-            {`Deseja realmente excluir a cidade de ${cityName}? `}
+            {`${t('confirmRemoveCity')} ${cityName}? `}
           </WeatherText>
           <Separator y={20} />
           <Row justifyContent={'space-between'}>
             <DefaultPressable onPress={() => toggleModal(!showModal)}>
-              <WeatherText color={'#888'}>Cancelar</WeatherText>
+              <WeatherText color={'#888'}>{t('cancel')}</WeatherText>
             </DefaultPressable>
             <ModalButton>
               <WeatherText size={16} color={Colors.white} onPress={onAccept}>
-                Confirmar
+                {t('confirm')}
               </WeatherText>
             </ModalButton>
           </Row>

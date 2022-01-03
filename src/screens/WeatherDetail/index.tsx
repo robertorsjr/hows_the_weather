@@ -14,7 +14,7 @@ import {
 } from '../../components';
 import {findMyWeatherPng} from '../../utils/findWeatherPng';
 import {ArrowUp, Trash} from '../../icons';
-import {Colors} from '../../resources';
+import {Colors, t} from '../../resources';
 import {returnOnlyDayAndMonth} from '../../utils/formatDate';
 import DailyDetail from './DailyDetail';
 import {StatusBar} from 'react-native';
@@ -91,7 +91,7 @@ function WeatherDetail({route}: DetailProps) {
       </Row>
       <Separator y={30} />
       {!error && cityDetail ? (
-        <Column center>
+        <Column alignItems={'center'}>
           <WeatherImage
             source={{
               uri: findMyWeatherPng(cityDetail.current.weather[0].icon),
@@ -102,7 +102,7 @@ function WeatherDetail({route}: DetailProps) {
           />
           <Row>
             <WeatherText size={20} color={Colors.white}>
-              Hoje
+              {t('today')}
             </WeatherText>
             <Separator x={10} />
             <WeatherText size={26} color={Colors.white}>
@@ -134,7 +134,7 @@ function WeatherDetail({route}: DetailProps) {
           </Row>
           <Separator y={20} />
           <WeatherText textAlign={'center'} size={16} color={Colors.white}>
-            Previsão para os próximos 5 dias
+            {t('forecastNextFiveDays')}
           </WeatherText>
           <Separator y={20} />
           <Row justifyContent={'space-evenly'} style={{width: '100%'}}>
@@ -145,7 +145,7 @@ function WeatherDetail({route}: DetailProps) {
         </Column>
       ) : (
         <WeatherText mx={55} size={20} color={'red'} textAlign={'center'}>
-          Ocorreu um erro ao tentar buscar os dados
+          {t('errorMessage')}
         </WeatherText>
       )}
       <ConfirmationModal

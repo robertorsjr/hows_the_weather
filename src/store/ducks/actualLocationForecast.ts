@@ -1,7 +1,10 @@
 import {findWeatherByGeo} from '../../services/findWeather';
 import {ActionProps, DispatchProps, ResponseProps} from '../types';
 import Geolocation from 'react-native-geolocation-service';
+import {PermissionsAndroid, Platform} from 'react-native';
+import {t} from '../../resources';
 
+const isAndroid = Platform.OS === 'android';
 const hasPermission = 'granted' || 'restricted';
 
 const Types = {
@@ -41,9 +44,27 @@ export function requestActualLocationForecast() {
     dispatch(Creators.request());
 
     try {
-      const authResponse = await Geolocation.requestAuthorization('whenInUse');
+      let authResponse = '';
 
-      if (authResponse === hasPermission) {
+      if (isAndroid) {
+        authResponse = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: t('permissionTitle'),
+            message: t('permissionMessage'),
+            buttonNeutral: t('permissionNeutralButton'),
+            buttonNegative: t('permissionNegativeButton'),
+            buttonPositive: t('permissionPositiveButton'),
+          },
+        );
+      } else {
+        authResponse = await Geolocation.requestAuthorization('whenInUse');
+      }
+
+      if (
+        authResponse === hasPermission ||
+        authResponse === PermissionsAndroid.RESULTS.GRANTED
+      ) {
         Geolocation.getCurrentPosition(
           async position => {
             const {data} = await findWeatherByGeo(

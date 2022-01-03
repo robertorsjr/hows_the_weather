@@ -16,6 +16,7 @@ import {requestActualLocationForecast} from '../../store/ducks/actualLocationFor
 import {requestSearchCity} from '../../store/ducks/searchCity';
 import {getCitiesForecast} from '../../store/ducks/citiesForecast';
 import {GeoResponse} from '../../models/geo';
+import {Colors} from '../../resources';
 
 function Home() {
   const [filter, setFilter] = useState<string>('');
@@ -32,13 +33,17 @@ function Home() {
     ({citiesForecastState}) => citiesForecastState,
   );
 
+  const {language} = useAppSelector(
+    ({changeLanguageState}) => changeLanguageState,
+  );
+
   const navigation = useNavigation<any>();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(requestActualLocationForecast());
     dispatch(getCitiesForecast());
-  }, [dispatch]);
+  }, [dispatch, language]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(
@@ -65,7 +70,7 @@ function Home() {
 
   return (
     <WeatherContainer>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar barStyle={'dark-content'} backgroundColor={Colors.purple} />
       <Separator y={20} />
       <Header isSearch={isSearch} setSearch={setSearch} setFilter={setFilter} />
       {isSearch ? (

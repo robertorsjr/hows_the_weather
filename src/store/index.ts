@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['citiesState'],
+  whitelist: ['citiesState', 'changeLanguageState'],
 };
 
 const rootReducer = (state: StateProps, action: ActionProps) => {

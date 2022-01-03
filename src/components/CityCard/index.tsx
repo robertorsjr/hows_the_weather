@@ -3,7 +3,7 @@ import {Row, WeatherText} from '../index';
 import {CityCardContainer} from './styles';
 import {useAppDispatch, useAppSelector} from '../../hooks/useAppDispatch';
 import {addCity} from '../../store/ducks/cities';
-import {Colors} from '../../resources';
+import {Colors, t} from '../../resources';
 import {GeoResponse} from '../../models/geo';
 
 type CityCardProps = {
@@ -45,11 +45,11 @@ function CityCard({item, setSearch}: CityCardProps) {
         <Row justifyContent={'flex-end'}>
           {hasCity ? (
             <WeatherText color={Colors.danger} size={18}>
-              Já esta na lista
+              {t('alreadyInList')}
             </WeatherText>
           ) : (
             <WeatherText color={Colors.purple} size={18}>
-              Toque para adicionar
+              {t('touchToAdd')}
             </WeatherText>
           )}
         </Row>

@@ -1,16 +1,17 @@
 import React from 'react';
 import {Separator, WeatherText} from '../index';
 import {Container} from './styles';
+import {t} from '../../resources';
 
 function EmptyList() {
   return (
     <Container>
       <WeatherText medium size={18} textAlign={'center'}>
-        Parece que você ainda não adicionou uma cidade
+        {t('emptyListOne')}
       </WeatherText>
       <Separator y={10} />
       <WeatherText textAlign={'center'} color={'gray'}>
-        Tente adicionar uma cidade usando o botão de busca
+        {t('emptyListTwo')}
       </WeatherText>
     </Container>
   );

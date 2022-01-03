@@ -9,7 +9,8 @@ import {
 import {Close, Search} from '../../icons';
 import {useAppDispatch, useAppSelector} from '../../hooks/useAppDispatch';
 import {clearSearch} from '../../store/ducks/searchCity';
-import {Colors} from '../../resources';
+import {Colors, t} from '../../resources';
+import LanguageToggle from '../LanguageToggle';
 
 type HeaderProps = {
   isSearch: boolean;
@@ -46,6 +47,7 @@ function Header({isSearch, setSearch, setFilter}: HeaderProps) {
             returnKeyType={'search'}
             onChangeText={setSearchedText}
             isLoading={loading}
+            placeholder={t('placeHolderMessage')}
           />
         </Row>
       ) : (
@@ -56,11 +58,15 @@ function Header({isSearch, setSearch, setFilter}: HeaderProps) {
           justifyContent={'space-between'}
           alignItems={'center'}>
           <WeatherText size={22} bold color={Colors.purple}>
-            Cidades
+            {t('cities')}
           </WeatherText>
-          <DefaultPressable onPress={() => setSearch(true)}>
-            <Search />
-          </DefaultPressable>
+          <Row>
+            <LanguageToggle />
+            <Separator x={25} />
+            <DefaultPressable onPress={() => setSearch(true)}>
+              <Search />
+            </DefaultPressable>
+          </Row>
         </Row>
       )}
       <Separator y={20} />

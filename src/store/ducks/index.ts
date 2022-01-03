@@ -4,6 +4,7 @@ import searchCityState from './searchCity';
 import citiesState from './cities';
 import findLastWeatherDaysState from './lastWeatherDays';
 import citiesForecastState from './citiesForecast';
+import changeLanguageState from './changeLanguage';
 
 export default combineReducers({
   actualLocationForecastState,
@@ -11,4 +12,5 @@ export default combineReducers({
   citiesState,
   citiesForecastState,
   findLastWeatherDaysState,
+  changeLanguageState,
 });

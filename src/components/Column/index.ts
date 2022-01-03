@@ -2,12 +2,12 @@ import styled from 'styled-components/native';
 
 type ColumnViewProps = {
   padding?: number;
-  center?: boolean;
+  alignItems?: any;
 };
 
 const Column = styled.View<ColumnViewProps>`
   padding: ${({padding}) => (padding ? `${padding}px` : 0)};
-  align-items: ${({center}) => center && 'center'};
+  align-items: ${({alignItems}) => alignItems || 'flex-start'};
 `;
 
 export default Column;

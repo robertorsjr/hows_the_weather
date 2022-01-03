@@ -5,3 +5,5 @@ export {default as ArrowLeft} from './ArrowLeft';
 export {default as Search} from './Search';
 export {default as Close} from './Close';
 export {default as Trash} from './Trash';
+export {default as BrazilFlag} from './BrazilFlag';
+export {default as UsaFlag} from './UsaFlag';

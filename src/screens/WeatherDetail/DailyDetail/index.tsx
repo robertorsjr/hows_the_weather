@@ -13,7 +13,7 @@ function DailyDetail({day}: DailyProps) {
   const image = findMyWeatherPng(day.weather[0].icon);
 
   return (
-    <Column center>
+    <Column alignItems={'center'}>
       <WeatherImage
         source={{uri: image}}
         resizeMode={'contain'}
