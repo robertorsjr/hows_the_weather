@@ -3,6 +3,7 @@ import {ActionProps, DispatchProps, ResponseProps} from '../types';
 
 const Types = {
   REQUEST: 'searchCity/REQUEST',
+  CLEAR: 'searchCity/CLEAR',
   REQUEST_SUCCESS: 'searchCity/REQUEST_SUCCESS',
   REQUEST_FAILURE: 'searchCity/REQUEST_FAILURE',
 };
@@ -13,6 +14,13 @@ export const Creators = {
     data: {
       loading: true,
       error: false,
+    },
+  }),
+
+  clear: () => ({
+    type: Types.CLEAR,
+    data: {
+      data: false,
     },
   }),
 
@@ -46,6 +54,12 @@ export function requestSearchCity(name: string) {
   };
 }
 
+export function clearSearch() {
+  return (dispatch: DispatchProps) => {
+    dispatch(Creators.clear());
+  };
+}
+
 const initialState = {
   loading: false,
   error: false,
@@ -59,9 +73,8 @@ export default function searchCityState(
   const {type, data} = action;
 
   switch (type) {
-    case Types.REQUEST_SUCCESS: {
-      return {...state, ...data};
-    }
+    case Types.REQUEST_SUCCESS:
+    case Types.CLEAR:
     case Types.REQUEST_FAILURE:
     case Types.REQUEST: {
       return {...state, ...data};

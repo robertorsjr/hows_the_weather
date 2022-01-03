@@ -16,3 +16,4 @@ export {default as CityCard} from './CityCard';
 export {default as EmptyView} from './EmptyView';
 export {default as WeatherList} from './WeatherList';
 export {default as WeatherImage} from './WeatherImage';
+export {default as ConfirmationModal} from './ConfirmationModal';

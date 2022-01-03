@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Column,
+  ConfirmationModal,
   DefaultPressable,
   EmptyView,
   GoBackButton,
@@ -41,7 +42,9 @@ type SelectorProps = {
 };
 
 function WeatherDetail({route}: DetailProps) {
+  const [isDelete, setDelete] = useState<boolean>(false);
   const {lat, lon, name, id} = route.params;
+
   const navigation = useNavigation<any>();
   const {
     data: cityDetail,
@@ -81,7 +84,7 @@ function WeatherDetail({route}: DetailProps) {
         {actualLocation.name === name ? (
           <EmptyView />
         ) : (
-          <DefaultPressable onPress={handleRemoveItem}>
+          <DefaultPressable onPress={() => setDelete(true)}>
             <Trash />
           </DefaultPressable>
         )}
@@ -145,6 +148,12 @@ function WeatherDetail({route}: DetailProps) {
           Ocorreu um erro ao tentar buscar os dados
         </WeatherText>
       )}
+      <ConfirmationModal
+        showModal={isDelete}
+        toggleModal={setDelete}
+        cityName={name}
+        onAccept={handleRemoveItem}
+      />
     </WeatherContainer>
   );
 }

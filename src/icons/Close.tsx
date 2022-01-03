@@ -7,7 +7,7 @@ function Close({...props}: SvgProps) {
     <Svg width={18} height={18} fill="none" {...props}>
       <Path
         d="M17 1 1 17M1 1l16 16"
-        stroke={Colors.black}
+        stroke={Colors.purple}
         strokeLinejoin="round"
       />
     </Svg>

@@ -7,7 +7,9 @@ import {
   WeatherInput,
 } from '../index';
 import {Close, Search} from '../../icons';
-import {useAppSelector} from '../../hooks/useAppDispatch';
+import {useAppDispatch, useAppSelector} from '../../hooks/useAppDispatch';
+import {clearSearch} from '../../store/ducks/searchCity';
+import {Colors} from '../../resources';
 
 type HeaderProps = {
   isSearch: boolean;
@@ -18,6 +20,7 @@ type HeaderProps = {
 function Header({isSearch, setSearch, setFilter}: HeaderProps) {
   const [searchedText, setSearchedText] = useState('');
   const {loading} = useAppSelector(({searchCityState}) => searchCityState);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setFilter(searchedText);
@@ -26,6 +29,7 @@ function Header({isSearch, setSearch, setFilter}: HeaderProps) {
   function handleCloseSearch() {
     setSearch(false);
     setFilter('');
+    dispatch(clearSearch());
   }
 
   return (
@@ -51,7 +55,7 @@ function Header({isSearch, setSearch, setFilter}: HeaderProps) {
           height={51}
           justifyContent={'space-between'}
           alignItems={'center'}>
-          <WeatherText size={22} bold>
+          <WeatherText size={22} bold color={Colors.purple}>
             Cidades
           </WeatherText>
           <DefaultPressable onPress={() => setSearch(true)}>

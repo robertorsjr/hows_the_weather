@@ -1,17 +1,32 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Row, WeatherText} from '../index';
 import {CityCardContainer} from './styles';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppDispatch, useAppSelector} from '../../hooks/useAppDispatch';
 import {addCity} from '../../store/ducks/cities';
 import {Colors} from '../../resources';
+import {GeoResponse} from '../../models/geo';
 
 type CityCardProps = {
-  item: any;
+  item: GeoResponse;
   setSearch: (value: boolean) => void;
 };
 
 function CityCard({item, setSearch}: CityCardProps) {
+  const [hasCity, setHasCity] = useState<boolean>(false);
+  const {citiesForecast} = useAppSelector(
+    ({citiesForecastState}) => citiesForecastState,
+  );
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    function verifyCity() {
+      const verifyHasCity = citiesForecast.find(
+        (el: any) => el.name === item.name,
+      );
+      setHasCity(!!verifyHasCity);
+    }
+    verifyCity();
+  }, [citiesForecast, item.name]);
 
   function handleAddCity() {
     dispatch(addCity(item));
@@ -20,7 +35,7 @@ function CityCard({item, setSearch}: CityCardProps) {
 
   if (item) {
     return (
-      <CityCardContainer onPress={handleAddCity}>
+      <CityCardContainer onPress={() => !hasCity && handleAddCity()}>
         <WeatherText size={22} medium>
           {item.name}
         </WeatherText>
@@ -28,9 +43,15 @@ function CityCard({item, setSearch}: CityCardProps) {
           {item.sys.country}
         </WeatherText>
         <Row justifyContent={'flex-end'}>
-          <WeatherText color={Colors.purple} size={18}>
-            Toque para adicionar
-          </WeatherText>
+          {hasCity ? (
+            <WeatherText color={Colors.danger} size={18}>
+              Já esta na lista
+            </WeatherText>
+          ) : (
+            <WeatherText color={Colors.purple} size={18}>
+              Toque para adicionar
+            </WeatherText>
+          )}
         </Row>
       </CityCardContainer>
     );

@@ -8,7 +8,7 @@ type InputContainerProps = {
 export const InputContainer = styled.View<InputContainerProps>`
   border-width: 1px;
   border-radius: 5px;
-  border-color: ${({isFocused}) => (isFocused ? Colors.purple : Colors.black)};
+  border-color: ${({isFocused}) => (isFocused ? Colors.purple : 'gray')};
   justify-content: space-between;
   align-items: center;
   flex-direction: row;

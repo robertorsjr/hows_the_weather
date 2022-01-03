@@ -13,7 +13,7 @@ function WeatherInput({isLoading, ...props}: InputProps) {
     <InputContainer isFocused={isFocused}>
       {/*// @ts-ignore*/}
       <Input
-        selectionColor={Colors.black}
+        selectionColor={Colors.purple}
         placeholderTextColor={'#77604999'}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}

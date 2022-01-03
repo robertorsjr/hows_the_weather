@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Svg, {SvgProps, Path} from 'react-native-svg';
+import {Colors} from '../resources';
 
 const Search = (props: SvgProps) => (
   <Svg
+    viewBox="0 0 30 30"
+    fill={Colors.purple}
     width={24}
     height={24}
-    fill={'#000'}
-    fillRule="evenodd"
-    clipRule="evenodd"
     {...props}>
-    <Path d="M15.853 16.56A9.458 9.458 0 0 1 9.5 19C4.257 19 0 14.743 0 9.5S4.257 0 9.5 0 19 4.257 19 9.5c0 2.442-.923 4.67-2.44 6.353l7.44 7.44-.707.707-7.44-7.44zM9.5 1C14.191 1 18 4.809 18 9.5S14.191 18 9.5 18 1 14.191 1 9.5 4.809 1 9.5 1z" />
+    <Path d="M13 3C7.489 3 3 7.489 3 13s4.489 10 10 10a9.947 9.947 0 0 0 6.322-2.264l5.971 5.971a1 1 0 1 0 1.414-1.414l-5.97-5.97A9.947 9.947 0 0 0 23 13c0-5.511-4.489-10-10-10zm0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8-8-3.57-8-8 3.57-8 8-8z" />
   </Svg>
 );
 
