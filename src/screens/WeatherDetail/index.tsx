@@ -1,14 +1,15 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import FastImage from 'react-native-fast-image';
 import {
   Column,
   DefaultPressable,
-  EmptyView,
   GoBackButton,
   Loading,
   Row,
   Separator,
   WeatherContainer,
+  WeatherImage,
   WeatherText,
 } from '../../components';
 import {findLastWeatherDays} from '../../services/findWeather';
@@ -18,6 +19,10 @@ import {ArrowUp, Trash} from '../../icons';
 import {Colors} from '../../resources';
 import {returnOnlyDayAndMonth} from '../../utils/formatDate';
 import DailyDetail from './DailyDetail';
+import {StatusBar} from 'react-native';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {removeCity} from '../../store/ducks/cities';
+import {useNavigation} from '@react-navigation/native';
 
 type DetailProps = {
   route: {
@@ -34,6 +39,8 @@ function WeatherDetail({route}: DetailProps) {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
   const [cityDetail, setCityDetail] = useState<WeatherDetails>();
+  const navigation = useNavigation<any>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function getDetail() {
@@ -55,26 +62,33 @@ function WeatherDetail({route}: DetailProps) {
     return <Loading />;
   }
 
+  function handleRemoveItem() {
+    dispatch(removeCity(cityDetail));
+    navigation.navigate('Home');
+  }
+
   return (
     <WeatherContainer isDetail>
+      <StatusBar barStyle={'light-content'} />
       <Separator y={30} />
       <Row justifyContent={'space-between'} alignItems={'center'}>
         <GoBackButton />
         <WeatherText size={20} medium textAlign={'center'} color={Colors.white}>
           {name}
         </WeatherText>
-        <DefaultPressable>
+        <DefaultPressable onPress={handleRemoveItem}>
           <Trash />
         </DefaultPressable>
       </Row>
       <Separator y={30} />
       {!isError && cityDetail ? (
         <Column center>
-          <FastImage
+          <WeatherImage
             source={{
               uri: findMyWeatherPng(cityDetail.current.weather[0].icon),
             }}
-            style={{height: 100, width: 100}}
+            height={100}
+            width={100}
             resizeMode={'contain'}
           />
           <Row>
@@ -114,7 +128,7 @@ function WeatherDetail({route}: DetailProps) {
             Previsão para os próximos 5 dias
           </WeatherText>
           <Separator y={20} />
-          <Row justifyContent={'space-evenly'}>
+          <Row justifyContent={'space-evenly'} style={{width: '100%'}}>
             {cityDetail.daily.slice(1, 6).map(day => (
               <DailyDetail key={day.dt} day={day} />
             ))}

@@ -37,7 +37,7 @@ function Header({isSearch, setSearch, setFilter}: HeaderProps) {
           <DefaultPressable onPress={handleCloseSearch}>
             <Close />
           </DefaultPressable>
-          <Separator x={10} />
+          <Separator x={18} />
           <WeatherInput
             returnKeyType={'search'}
             onChangeText={setSearchedText}

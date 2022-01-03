@@ -1,6 +1,5 @@
 import React from 'react';
-import {Column, WeatherText} from '../../../components';
-import FastImage from 'react-native-fast-image';
+import {Column, WeatherImage, WeatherText} from '../../../components';
 import {findMyWeatherPng} from '../../../utils/findWeatherPng';
 import {returnOnlyDay, returnOnlyDayAndMonth} from '../../../utils/formatDate';
 import {Daily} from '../../../models/details';
@@ -15,14 +14,11 @@ function DailyDetail({day}: DailyProps) {
 
   return (
     <Column center>
-      <FastImage
+      <WeatherImage
         source={{uri: image}}
         resizeMode={'contain'}
-        style={{
-          height: 40,
-          width: 40,
-          alignItems: 'center',
-        }}
+        height={40}
+        width={40}
       />
       <WeatherText
         size={16}

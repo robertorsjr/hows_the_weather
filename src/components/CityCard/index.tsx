@@ -3,6 +3,7 @@ import {Row, WeatherText} from '../index';
 import {CityCardContainer} from './styles';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {addCity} from '../../store/ducks/cities';
+import {Colors} from '../../resources';
 
 type CityCardProps = {
   item: any;
@@ -27,7 +28,7 @@ function CityCard({item, setSearch}: CityCardProps) {
           {item.sys.country}
         </WeatherText>
         <Row justifyContent={'flex-end'}>
-          <WeatherText color={'blue'} size={16}>
+          <WeatherText color={Colors.purple} size={18}>
             Toque para adicionar
           </WeatherText>
         </Row>

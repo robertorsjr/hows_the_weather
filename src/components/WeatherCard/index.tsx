@@ -31,12 +31,14 @@ function WeatherCard({item, isLocal, handlePress}: WeatherCardProps) {
             {item.main.temp.toFixed(0)}º
           </WeatherText>
           <Column center>
-            <WeatherText>
-              {item.main.temp_min.toFixed(0)}º<ArrowUp isDown />
-            </WeatherText>
-            <WeatherText>
-              {item.main.temp_max.toFixed(0)}º<ArrowUp />
-            </WeatherText>
+            <Row>
+              <WeatherText>{item.main.temp_min.toFixed(0)}º</WeatherText>
+              <ArrowUp isDown />
+            </Row>
+            <Row>
+              <WeatherText>{item.main.temp_max.toFixed(0)}º</WeatherText>
+              <ArrowUp />
+            </Row>
           </Column>
           <Column center>
             <WeatherText medium size={20}>

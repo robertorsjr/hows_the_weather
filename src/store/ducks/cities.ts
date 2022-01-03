@@ -40,6 +40,17 @@ export function addCity(city: any) {
   };
 }
 
+export function removeCity(city: any) {
+  return (dispatch: DispatchProps, getState: any) => {
+    const {storedCities} = getState().citiesState;
+    const filteredCities = storedCities.filter(
+      (storeCity: any) => storeCity.id !== city.id,
+    );
+    dispatch(Creators.add([...filteredCities]));
+    dispatch(getCitiesForecast());
+  };
+}
+
 export function likeCity(city: any, like: boolean) {
   return (dispatch: DispatchProps, getState: any) => {
     const {storedCities} = getState().citiesState;

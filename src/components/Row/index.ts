@@ -14,10 +14,10 @@ type RowProps = {
   left?: number;
   right?: number;
   height?: number;
+  isWide?: boolean;
 };
 
 const Row = styled.View<RowProps>`
-  width: 100%;
   flex-direction: row;
   align-items: ${({alignItems}) => alignItems || 'center'};
   justify-content: ${({justifyContent}) => justifyContent || 'center'};
